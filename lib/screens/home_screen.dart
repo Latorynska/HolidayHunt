@@ -15,15 +15,16 @@ class _HomeScreenState extends State<HomeScreen> {
   int currentPage = 0;
   List<Map<String, String>> splashData = [
     {
-      "text": "Welcome to Wisata App, Let’s Vacation!",
-      "image": "assets/images/splash_1.png"
+      "text": "Mulai Berburu Sekarang!",
+      "image": "assets/images/splash_1.png",
     },
     {
-      "text": "We help people conect with store \naround Indonesia",
+      "text":
+          "Buat momen liburan mu menjadi lebih berwarna! \n Temukan berbagai harta karun berharga!",
       "image": "assets/images/splash_2.png"
     },
     {
-      "text": "We show the easy way to vacation. \nJust connect with us",
+      "text": "Pecahkan teka-teki \n Pecahkan misteri \n Temukan Kejutannya",
       "image": "assets/images/splash_3.png"
     },
   ];
@@ -50,10 +51,10 @@ class _HomeScreenState extends State<HomeScreen> {
                         children: <Widget>[
                           const Spacer(),
                           const Text(
-                            "Wisata App",
+                            "Holiday Hunt",
                             style: TextStyle(
                               fontSize: 36,
-                              color: primaryColor,
+                              color: secondaryColor,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
