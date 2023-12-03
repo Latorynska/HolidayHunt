@@ -20,14 +20,6 @@ class _SplashScreenState extends State<SplashScreen> {
             'images/logo.png',
             width: 300,
           ),
-          const Text(
-            'Wisata App',
-            style: TextStyle(
-              fontSize: 35,
-              fontWeight: FontWeight.bold,
-              color: Colors.white,
-            ),
-          ),
         ],
       ),
       splashIconSize: 400,

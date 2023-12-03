@@ -1,8 +1,10 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:wisata_app/constants.dart';
 import 'package:wisata_app/helper/keyboard.dart';
 import 'package:wisata_app/helper/session_manager.dart';
 import 'package:wisata_app/screens/login_success_screen.dart';
+import 'package:wisata_app/screens/register_screen.dart';
 import 'package:wisata_app/services/auth_services.dart';
 import 'package:wisata_app/size_config.dart';
 import 'package:wisata_app/widgets/custom_snackbar.dart';
@@ -94,12 +96,10 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
-    // Get the screen size
-    Size screenSize = MediaQuery.of(context).size;
-
     return Scaffold(
       body: Stack(
         children: [
+          // Background image container
           Container(
             width: double.infinity,
             height: double.infinity,
@@ -110,72 +110,112 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ),
           ),
+          // Content container for form and text
           Column(
             children: [
+              // Move the AppBar outside the Center widget
               AppBar(
                 backgroundColor: Colors.transparent,
                 elevation: 0,
               ),
+              // Use Expanded to take remaining space and Align to center the content
               Expanded(
-                child: SingleChildScrollView(
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: getProportionateScreenWidth(20),
-                    ),
-                    child: Column(
-                      children: [
-                        SizedBox(height: SizeConfig.screenHeight * 0.04),
-                        SizedBox(height: SizeConfig.screenHeight * 0.08),
-                        Form(
-                          key: _formKey,
-                          child: Column(
+                child: Align(
+                  alignment: Alignment.center,
+                  child: SingleChildScrollView(
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: getProportionateScreenWidth(20),
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SizedBox(height: SizeConfig.screenHeight * 0.04),
+                          SizedBox(height: SizeConfig.screenHeight * 0.08),
+                          Form(
+                            key: _formKey,
+                            child: Column(
+                              children: [
+                                buildEmailFormField(),
+                                SizedBox(
+                                    height: getProportionateScreenHeight(10)),
+                                buildPasswordFormField(),
+                                SizedBox(
+                                    height: getProportionateScreenHeight(10)),
+                                FormError(
+                                    errors: errors, textColor: Colors.white),
+                                SizedBox(
+                                    height: getProportionateScreenHeight(10)),
+                                DefaultButton(
+                                  text: "Login",
+                                  press: () {
+                                    if (_formKey.currentState!.validate()) {
+                                      _formKey.currentState!.save();
+                                      KeyboardUtil.hideKeyboard(context);
+                                      _login();
+                                    }
+                                  },
+                                ),
+                              ],
+                            ),
+                          ),
+                          SizedBox(height: getProportionateScreenHeight(30)),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              buildEmailFormField(),
-                              SizedBox(
-                                  height: getProportionateScreenHeight(30)),
-                              buildPasswordFormField(),
-                              SizedBox(
-                                  height: getProportionateScreenHeight(30)),
-                              FormError(errors: errors),
-                              SizedBox(
-                                  height: getProportionateScreenHeight(30)),
-                              DefaultButton(
-                                text: "Login",
-                                press: () {
-                                  if (_formKey.currentState!.validate()) {
-                                    _formKey.currentState!.save();
-                                    KeyboardUtil.hideKeyboard(context);
-                                    _login();
-                                  }
-                                },
+                              Column(
+                                children: [
+                                  RichText(
+                                    text: TextSpan(
+                                      style: TextStyle(
+                                        fontSize:
+                                            getProportionateScreenWidth(16),
+                                        color: Colors.white,
+                                      ),
+                                      children: [
+                                        TextSpan(
+                                          text: "Belum Punya Akun? ",
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  RichText(
+                                    text: TextSpan(
+                                      style: TextStyle(
+                                        fontSize:
+                                            getProportionateScreenWidth(16),
+                                        color: Colors.white,
+                                      ),
+                                      children: [
+                                        TextSpan(
+                                          text: "Daftar ",
+                                        ),
+                                        TextSpan(
+                                          text: "Disini",
+                                          style: TextStyle(
+                                            color: primaryColor,
+                                            decoration:
+                                                TextDecoration.underline,
+                                          ),
+                                          recognizer: TapGestureRecognizer()
+                                            ..onTap = () {
+                                              Navigator.push(context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) {
+                                                return RegisterScreen();
+                                              }));
+                                            },
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
                               ),
                             ],
                           ),
-                        ),
-                        SizedBox(height: SizeConfig.screenHeight * 0.08),
-                        SizedBox(height: getProportionateScreenHeight(30)),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              "Don’t have an account? ",
-                              style: TextStyle(
-                                fontSize: getProportionateScreenWidth(16),
-                              ),
-                            ),
-                            GestureDetector(
-                              onTap: () {},
-                              child: Text(
-                                "Sign Up",
-                                style: TextStyle(
-                                  fontSize: getProportionateScreenWidth(16),
-                                  color: primaryColor,
-                                ),
-                              ),
-                            ),
-                          ],
-                        )
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ),
@@ -209,17 +249,23 @@ class _LoginScreenState extends State<LoginScreen> {
         }
         return null;
       },
-      style: TextStyle(color: Colors.white), // Set text color to white
+      style: TextStyle(color: Colors.black87),
       decoration: InputDecoration(
+        contentPadding: EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+        filled: true,
+        fillColor: Color(0xFFE6E0E9),
         labelText: "Password",
         hintText: "Enter your password",
-        floatingLabelBehavior: FloatingLabelBehavior.always,
         suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/Lock.svg"),
-        labelStyle: TextStyle(color: Colors.white), // Set label color to white
-        hintStyle: TextStyle(color: Colors.white),
-        enabledBorder: UnderlineInputBorder(
-          borderSide: BorderSide(
-              color: Colors.white), // Set enabled border color to white
+        labelStyle: TextStyle(color: Colors.black87),
+        hintStyle: TextStyle(color: Colors.black87),
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.black87),
+          borderRadius: BorderRadius.circular(10.0),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.black87),
+          borderRadius: BorderRadius.circular(10.0),
         ),
       ),
     );
@@ -247,17 +293,23 @@ class _LoginScreenState extends State<LoginScreen> {
         }
         return null;
       },
-      style: TextStyle(color: Colors.white), // Set text color to white
+      style: TextStyle(color: Colors.black87),
       decoration: InputDecoration(
+        contentPadding: EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+        filled: true,
+        fillColor: Color(0xFFE6E0E9),
         labelText: "Email",
         hintText: "Enter your email",
-        floatingLabelBehavior: FloatingLabelBehavior.always,
         suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/Mail.svg"),
-        labelStyle: TextStyle(color: Colors.white), // Set label color to white
-        hintStyle: TextStyle(color: Colors.white),
-        enabledBorder: UnderlineInputBorder(
-          borderSide: BorderSide(
-              color: Colors.white), // Set enabled border color to white
+        labelStyle: TextStyle(color: Colors.black87),
+        hintStyle: TextStyle(color: Colors.black87),
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.black87),
+          borderRadius: BorderRadius.circular(10.0),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.black87),
+          borderRadius: BorderRadius.circular(10.0),
         ),
       ),
     );

@@ -6,19 +6,27 @@ class FormError extends StatelessWidget {
   const FormError({
     Key? key,
     required this.errors,
+    this.textColor = Colors.black, // Default text color
   }) : super(key: key);
 
   final List<String?> errors;
+  final Color textColor;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: List.generate(
-          errors.length, (index) => formErrorText(error: errors[index]!)),
+        errors.length,
+        (index) => formErrorText(
+          error: errors[index]!,
+        ),
+      ),
     );
   }
 
-  Row formErrorText({required String error}) {
+  Row formErrorText({
+    required String error,
+  }) {
     return Row(
       children: [
         SizedBox(height: getProportionateScreenHeight(20)),
@@ -30,7 +38,10 @@ class FormError extends StatelessWidget {
         SizedBox(
           width: getProportionateScreenWidth(10),
         ),
-        Text(error),
+        Text(
+          error,
+          style: TextStyle(color: textColor),
+        ),
       ],
     );
   }

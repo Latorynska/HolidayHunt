@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wisata_app/screens/login_screen.dart';
 import 'package:wisata_app/screens/splash_screen.dart';
 
 void main() {
@@ -12,7 +13,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Wisata App',
       theme: ThemeData(),
-      home: const SplashScreen(),
+      // home: const SplashScreen(),
+      home: const LoginScreen(),
     );
   }
 }
