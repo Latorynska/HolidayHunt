@@ -4,6 +4,7 @@ import 'package:wisata_app/screens/main_screen.dart';
 import 'package:wisata_app/utils/contants.dart';
 import 'package:wisata_app/widgets/button_nav_bar.dart';
 import 'package:wisata_app/widgets/category_card.dart';
+import 'package:wisata_app/widgets/hunting_location_card.dart';
 import 'package:wisata_app/widgets/lokasi_card.dart';
 
 class DashboardScreen extends StatelessWidget {
@@ -38,40 +39,39 @@ class DashboardScreen extends StatelessWidget {
                 children: <Widget>[
                   SizedBox(height: size.height * .03),
                   LokasiCard(),
-                  SizedBox(height: size.height * .03),
+                  SizedBox(height: size.height * .04),
+                  Container(
+                    width: size.width,
+                    padding: EdgeInsets.fromLTRB(15, 10, 10, 10),
+                    margin: EdgeInsets.fromLTRB(0, 0, 0, 5),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      gradient: LinearGradient(
+                        begin: Alignment.centerLeft,
+                        end: Alignment.centerRight,
+                        colors: [
+                          Colors.white.withOpacity(
+                              0.7), // Starting color with higher opacity
+                          Colors.white.withOpacity(
+                              0.1), // Ending color with lower opacity
+                        ],
+                      ),
+                    ),
+                    child: Text(
+                      'Lokasi Harta Terdekat',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.black87,
+                      ),
+                    ),
+                  ),
                   Expanded(
-                    child: GridView.count(
-                      crossAxisCount: 2,
-                      childAspectRatio: .85,
-                      crossAxisSpacing: 20,
-                      mainAxisSpacing: 20,
-                      children: <Widget>[
-                        CategoryCard(
-                          title: "Vacation",
-                          imgSrc: "assets/icons/vacation.png",
-                          press: () {
-                            Navigator.push(context,
-                                MaterialPageRoute(builder: (context) {
-                              return MainScreen();
-                            }));
-                          },
-                        ),
-                        CategoryCard(
-                          title: "News",
-                          imgSrc: "assets/icons/news.png",
-                          press: () {},
-                        ),
-                        CategoryCard(
-                          title: "Ticket",
-                          imgSrc: "assets/icons/ticket.png",
-                          press: () {},
-                        ),
-                        CategoryCard(
-                          title: "Lodging",
-                          imgSrc: "assets/icons/lodging.png",
-                          press: () {},
-                        ),
-                      ],
+                    child: ListView.builder(
+                      itemCount: 8,
+                      itemBuilder: (BuildContext context, int index) {
+                        return HuntingLocationCard();
+                      },
                     ),
                   ),
                 ],
