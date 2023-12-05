@@ -16,11 +16,12 @@ class ButtonNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const Color inActiveIconColor = Color(0xFFB6B6B6);
+    const Color inActiveIconColor =
+        Colors.white; // Set the inActiveIconColor to white
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 14),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Colors.black, // Set the background color to black
         boxShadow: [
           BoxShadow(
             offset: const Offset(0, -15),
@@ -28,47 +29,53 @@ class ButtonNavBar extends StatelessWidget {
             color: const Color(0xFFDADADA).withOpacity(0.15),
           ),
         ],
-        borderRadius: const BorderRadius.only(
-          topLeft: Radius.circular(40),
-          topRight: Radius.circular(40),
-        ),
+        borderRadius: const BorderRadius.only(),
       ),
       child: SafeArea(
-          top: false,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              IconButton(
-                icon: SvgPicture.asset(
-                  "assets/icons/home.svg",
-                  color: MenuState.home == selectedMenu
-                      ? primaryColor
-                      : inActiveIconColor,
+        top: false,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            IconButton(
+              icon: SvgPicture.asset(
+                "assets/icons/home.svg",
+                color: MenuState.home == selectedMenu
+                    ? primaryColor
+                    : inActiveIconColor,
+              ),
+              onPressed: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const DashboardScreen(),
                 ),
-                onPressed: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const DashboardScreen())),
               ),
-              IconButton(
-                icon: SvgPicture.asset("assets/icons/message.svg"),
-                onPressed: () {},
+            ),
+            IconButton(
+              icon: SvgPicture.asset(
+                "assets/icons/message.svg",
+                color: inActiveIconColor,
               ),
-              IconButton(
-                  icon: SvgPicture.asset(
-                    "assets/icons/account.svg",
-                    color: MenuState.profile == selectedMenu
-                        ? primaryColor
-                        : inActiveIconColor,
+              onPressed: () {},
+            ),
+            IconButton(
+              icon: SvgPicture.asset(
+                "assets/icons/account.svg",
+                color: MenuState.profile == selectedMenu
+                    ? primaryColor
+                    : inActiveIconColor,
+              ),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ProfileScreen(),
                   ),
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => ProfileScreen()));
-                  }),
-            ],
-          )),
+                );
+              },
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

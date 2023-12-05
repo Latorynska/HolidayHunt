@@ -4,6 +4,7 @@ import 'package:wisata_app/screens/main_screen.dart';
 import 'package:wisata_app/utils/contants.dart';
 import 'package:wisata_app/widgets/button_nav_bar.dart';
 import 'package:wisata_app/widgets/category_card.dart';
+import 'package:wisata_app/widgets/lokasi_card.dart';
 
 class DashboardScreen extends StatelessWidget {
   const DashboardScreen({super.key});
@@ -15,13 +16,17 @@ class DashboardScreen extends StatelessWidget {
       bottomNavigationBar: const ButtonNavBar(selectedMenu: MenuState.home),
       body: Stack(
         children: <Widget>[
-          Container(
-            height: size.height * .45,
-            decoration: const BoxDecoration(
-              color: bgLightColor,
-              image: DecorationImage(
-                alignment: Alignment.centerLeft,
-                image: AssetImage("assets/images/bg-dashboard.png"),
+          Positioned(
+            top: 0,
+            left: 0,
+            right: 0,
+            child: Container(
+              height: size.height,
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage("assets/images/bg-dashboard.jpg"),
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
           ),
@@ -31,27 +36,8 @@ class DashboardScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Align(
-                    alignment: Alignment.topRight,
-                    child: Container(
-                      alignment: Alignment.center,
-                      height: 52,
-                      width: 52,
-                      decoration: const BoxDecoration(
-                        color: primaryColor,
-                        shape: BoxShape.circle,
-                      ),
-                      child: SvgPicture.asset("assets/icons/menu.svg"),
-                    ),
-                  ),
-                  const Text("Good Morning \nHappy People",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 35,
-                        color: textLightColor,
-                      )),
                   SizedBox(height: size.height * .03),
-                  const SearchBar(),
+                  LokasiCard(),
                   SizedBox(height: size.height * .03),
                   Expanded(
                     child: GridView.count(
@@ -91,7 +77,7 @@ class DashboardScreen extends StatelessWidget {
                 ],
               ),
             ),
-          )
+          ),
         ],
       ),
     );
