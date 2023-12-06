@@ -3,7 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:wisata_app/constants.dart';
 import 'package:wisata_app/helper/session_manager.dart';
 import 'package:wisata_app/screens/login_screen.dart';
-import 'package:wisata_app/widgets/button_nav_bar.dart';
+import 'package:wisata_app/widgets/bottom_nav_bar.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -97,7 +97,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ],
         ),
       ),
-      bottomNavigationBar: const ButtonNavBar(selectedMenu: MenuState.profile),
+      bottomNavigationBar: const BottomNavBar(selectedMenu: MenuState.profile),
     );
   }
 

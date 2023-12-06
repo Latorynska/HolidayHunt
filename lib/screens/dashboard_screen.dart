@@ -1,20 +1,26 @@
+// dashboard.dart
+
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:wisata_app/models/hunting_location.dart';
+import 'package:wisata_app/screens/detail_lokasi.dart';
 import 'package:wisata_app/screens/main_screen.dart';
-import 'package:wisata_app/utils/contants.dart';
-import 'package:wisata_app/widgets/button_nav_bar.dart';
-import 'package:wisata_app/widgets/category_card.dart';
+import 'package:wisata_app/widgets/bottom_nav_bar.dart';
 import 'package:wisata_app/widgets/hunting_location_card.dart';
 import 'package:wisata_app/widgets/lokasi_card.dart';
 
 class DashboardScreen extends StatelessWidget {
-  const DashboardScreen({super.key});
+  const DashboardScreen({Key? key});
 
   @override
   Widget build(BuildContext context) {
+    // Use the data from the imported file
+    List<HuntingLocation> dummyHuntingLocations =
+        List.generate(6, (index) => generateRandomHuntingLocation());
+
     var size = MediaQuery.of(context).size;
+
     return Scaffold(
-      bottomNavigationBar: const ButtonNavBar(selectedMenu: MenuState.home),
+      bottomNavigationBar: const BottomNavBar(selectedMenu: MenuState.home),
       body: Stack(
         children: <Widget>[
           Positioned(
@@ -50,10 +56,8 @@ class DashboardScreen extends StatelessWidget {
                         begin: Alignment.centerLeft,
                         end: Alignment.centerRight,
                         colors: [
-                          Colors.white.withOpacity(
-                              0.7), // Starting color with higher opacity
-                          Colors.white.withOpacity(
-                              0.1), // Ending color with lower opacity
+                          Colors.white.withOpacity(0.7),
+                          Colors.white.withOpacity(0.1),
                         ],
                       ),
                     ),
@@ -68,9 +72,25 @@ class DashboardScreen extends StatelessWidget {
                   ),
                   Expanded(
                     child: ListView.builder(
-                      itemCount: 8,
+                      itemCount: dummyHuntingLocations.length,
                       itemBuilder: (BuildContext context, int index) {
-                        return HuntingLocationCard();
+                        HuntingLocation location = dummyHuntingLocations[index];
+                        List<String> rewardTypes =
+                            location.rewardInfo['Reward Type'] ?? [];
+                        return HuntingLocationCard(
+                          title: location.tekaTekiTitle,
+                          description: location.tekaTekiDescription,
+                          thumbnailPath: location.thumbnail,
+                          rewardTypes: rewardTypes,
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) {
+                                return DetailLokasi(location: location);
+                              }),
+                            );
+                          },
+                        );
                       },
                     ),
                   ),
