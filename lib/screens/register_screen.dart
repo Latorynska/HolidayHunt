@@ -48,7 +48,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
         // Simpan data pengguna ke SharedPreferences
         final prefs = await SessionManager.getInstance();
-        await prefs.saveUserData(user.email);
+        await prefs.saveUserData(
+            user.email, user.username!, user.telp!, user.imageUrl ?? '');
 
         Navigator.push(context, MaterialPageRoute(builder: (context) {
           return const LoginSuccessScreen();

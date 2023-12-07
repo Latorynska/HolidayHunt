@@ -1,5 +1,7 @@
+import 'dart:convert';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 import 'package:wisata_app/constants.dart';
 import 'package:wisata_app/helper/keyboard.dart';
 import 'package:wisata_app/helper/session_manager.dart';
@@ -11,6 +13,8 @@ import 'package:wisata_app/widgets/custom_snackbar.dart';
 import 'package:wisata_app/widgets/custom_suffix_icon.dart';
 import 'package:wisata_app/widgets/default_button.dart';
 import 'package:wisata_app/widgets/form_error.dart';
+
+const String endpointlogin = "https://65713f8409586eff6642581b.mockapi.io/user";
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -48,7 +52,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
         // Simpan data pengguna ke SharedPreferences
         final prefs = await SessionManager.getInstance();
-        await prefs.saveUserData(user.email);
+        await prefs.saveUserData(
+            user.email, user.username!, user.telp!, user.imageUrl!);
 
         Navigator.push(context, MaterialPageRoute(builder: (context) {
           return const LoginSuccessScreen();

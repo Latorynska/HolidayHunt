@@ -4,7 +4,7 @@ import 'package:wisata_app/constants.dart';
 import 'package:wisata_app/screens/dashboard_screen.dart';
 import 'package:wisata_app/screens/profile_screen.dart';
 
-enum MenuState { home, message, profile }
+enum MenuState { home, settings, profile }
 
 class BottomNavBar extends StatelessWidget {
   const BottomNavBar({
@@ -39,6 +39,20 @@ class BottomNavBar extends StatelessWidget {
             IconButton(
               icon: SvgPicture.asset(
                 "assets/icons/account.svg",
+                color: MenuState.profile == selectedMenu
+                    ? primaryColor
+                    : inActiveIconColor,
+              ),
+              onPressed: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const ProfileScreen(),
+                ),
+              ),
+            ),
+            IconButton(
+              icon: SvgPicture.asset(
+                "assets/icons/home.svg",
                 color: MenuState.home == selectedMenu
                     ? primaryColor
                     : inActiveIconColor,
@@ -46,21 +60,14 @@ class BottomNavBar extends StatelessWidget {
               onPressed: () => Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const DashboardScreen(),
+                  builder: (context) => const ProfileScreen(),
                 ),
               ),
             ),
             IconButton(
               icon: SvgPicture.asset(
-                "assets/icons/home.svg",
-                color: inActiveIconColor,
-              ),
-              onPressed: () {},
-            ),
-            IconButton(
-              icon: SvgPicture.asset(
                 "assets/icons/settings.svg",
-                color: MenuState.profile == selectedMenu
+                color: MenuState.settings == selectedMenu
                     ? primaryColor
                     : inActiveIconColor,
               ),

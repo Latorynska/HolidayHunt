@@ -19,14 +19,18 @@ class HuntingLocationCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String truncatedDescription = description.length > 50
+    String truncatedTitle =
+        title.length > 20 ? '${title.substring(0, 20)}...' : title;
+    String truncatedDescription = description.length > 30
         ? '${description.substring(0, 20)}...'
         : description;
 
     String simplifiedRewardType = rewardTypes.isNotEmpty
         ? 'Reward Type: ${rewardTypes.first}${rewardTypes.length > 1 ? ' and ${rewardTypes.length - 1} more' : ''}'
         : 'No Reward Type';
-
+    String truncatedReward = simplifiedRewardType.length > 30
+        ? '${simplifiedRewardType.substring(0, 30)}...'
+        : simplifiedRewardType;
     return GestureDetector(
       onTap: onTap,
       child: Container(
@@ -58,7 +62,7 @@ class HuntingLocationCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  title,
+                  truncatedTitle,
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 18,
@@ -73,7 +77,7 @@ class HuntingLocationCard extends StatelessWidget {
                 ),
                 SizedBox(height: 8),
                 Text(
-                  simplifiedRewardType,
+                  truncatedReward,
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 14,

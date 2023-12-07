@@ -69,7 +69,7 @@
     },
     {
       "name": "flutter",
-      "rootUri": "file:///D:/Tugas%20Kuliah/Pemrograman%20Mobile/Flutter/flutter/packages/flutter",
+      "rootUri": "file:///C:/flutter/packages/flutter",
       "packageUri": "lib/",
       "languageVersion": "3.0"
     },
@@ -87,15 +87,27 @@
     },
     {
       "name": "flutter_test",
-      "rootUri": "file:///D:/Tugas%20Kuliah/Pemrograman%20Mobile/Flutter/flutter/packages/flutter_test",
+      "rootUri": "file:///C:/flutter/packages/flutter_test",
       "packageUri": "lib/",
       "languageVersion": "3.0"
     },
     {
       "name": "flutter_web_plugins",
-      "rootUri": "file:///D:/Tugas%20Kuliah/Pemrograman%20Mobile/Flutter/flutter/packages/flutter_web_plugins",
+      "rootUri": "file:///C:/flutter/packages/flutter_web_plugins",
       "packageUri": "lib/",
       "languageVersion": "3.0"
+    },
+    {
+      "name": "http",
+      "rootUri": "file:///C:/Users/Seria/AppData/Local/Pub/Cache/hosted/pub.dev/http-1.1.0",
+      "packageUri": "lib/",
+      "languageVersion": "3.0"
+    },
+    {
+      "name": "http_parser",
+      "rootUri": "file:///C:/Users/Seria/AppData/Local/Pub/Cache/hosted/pub.dev/http_parser-4.0.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
     },
     {
       "name": "lints",
@@ -225,7 +237,7 @@
     },
     {
       "name": "sky_engine",
-      "rootUri": "file:///D:/Tugas%20Kuliah/Pemrograman%20Mobile/Flutter/flutter/bin/cache/pkg/sky_engine",
+      "rootUri": "file:///C:/flutter/bin/cache/pkg/sky_engine",
       "packageUri": "lib/",
       "languageVersion": "3.0"
     },
@@ -264,6 +276,12 @@
       "rootUri": "file:///C:/Users/Seria/AppData/Local/Pub/Cache/hosted/pub.dev/test_api-0.6.0",
       "packageUri": "lib/",
       "languageVersion": "2.18"
+    },
+    {
+      "name": "typed_data",
+      "rootUri": "file:///C:/Users/Seria/AppData/Local/Pub/Cache/hosted/pub.dev/typed_data-1.3.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
     },
     {
       "name": "vector_graphics",
@@ -320,7 +338,7 @@
       "languageVersion": "3.1"
     }
   ],
-  "generated": "2023-12-06T06:48:24.386192Z",
+  "generated": "2023-12-07T04:09:58.916262Z",
   "generator": "pub",
-  "generatorVersion": "3.1.3"
+  "generatorVersion": "3.1.5"
 }

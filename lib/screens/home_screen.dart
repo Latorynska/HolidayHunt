@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wisata_app/constants.dart';
+import 'package:wisata_app/helper/session_manager.dart';
 import 'package:wisata_app/screens/login_screen.dart';
 import 'package:wisata_app/size_config.dart';
 import 'package:wisata_app/widgets/default_button.dart';
@@ -28,6 +29,15 @@ class _HomeScreenState extends State<HomeScreen> {
       "image": "assets/images/splash_3.png"
     },
   ];
+  Future<void> checkIsLogin(BuildContext context) async {
+    await SessionManager().isLogin(context);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    checkIsLogin(context);
+  }
 
   @override
   Widget build(BuildContext context) {

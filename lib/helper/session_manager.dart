@@ -44,13 +44,25 @@ class SessionManager {
     }
   }
 
-  Future<void> saveUserData(String email) async {
+  Future<void> saveUserData(
+      String email, String username, String telp, String imageUrl) async {
     await _preferences!.setBool('isLogin', true);
     await _preferences!.setString('email', email);
+    await _preferences!.setString('username', username);
+    await _preferences!.setString('telp', telp);
+    await _preferences!.setString('imageUrl', imageUrl);
   }
 
   String? getEmail() {
     return _preferences!.getString('email');
+  }
+
+  String? getUsername() {
+    return _preferences!.getString('username');
+  }
+
+  String? getImageUrl() {
+    return _preferences!.getString('imageUrl');
   }
 
   getIsLogin() {
@@ -60,6 +72,8 @@ class SessionManager {
   Future<void> clearUserData() async {
     await _preferences!.remove('isLogin');
     await _preferences!.remove('email');
+    await _preferences!.remove('username');
+    await _preferences!.remove('telp');
     await _preferences!.clear();
   }
 }

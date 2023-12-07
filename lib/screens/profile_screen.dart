@@ -17,10 +17,24 @@ Future<void> checkLoginStatus(BuildContext context) async {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+  late TextEditingController _usernameController;
+  late String? imageUrl;
   @override
   void initState() {
     super.initState();
     checkLoginStatus(context);
+
+    // Initialize the controller and set the username obtained from SessionManager
+    _usernameController = TextEditingController();
+    _usernameController.text = SessionManager().getUsername() ?? '';
+    imageUrl = SessionManager().getImageUrl();
+  }
+
+  @override
+  void dispose() {
+    // Dispose the controller when the widget is disposed
+    _usernameController.dispose();
+    super.dispose();
   }
 
   @override
@@ -40,8 +54,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 fit: StackFit.expand,
                 clipBehavior: Clip.none,
                 children: [
-                  const CircleAvatar(
-                    backgroundImage: AssetImage("assets/images/profile.png"),
+                  CircleAvatar(
+                    backgroundImage:
+                        imageUrl != null ? NetworkImage(imageUrl!) : null,
+                    child: imageUrl == null
+                        ? const Icon(Icons.account_circle, size: 60.0)
+                        : null,
                   ),
                   Positioned(
                     right: -16,
@@ -67,25 +85,127 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
             ),
             const SizedBox(height: 20),
-            ProfileMenu(
-              text: "My Account",
-              icon: "assets/icons/account.svg",
-              press: () => {},
+            Container(
+              margin: EdgeInsets.fromLTRB(20, 5, 20, 5),
+              child: TextFormField(
+                controller: _usernameController,
+                decoration: InputDecoration(
+                  filled: true,
+                  fillColor: Color(0xFFE6E0E9),
+                  labelText: 'Username',
+                  hintText: 'Input your username here',
+                  labelStyle: TextStyle(color: Colors.black),
+                  enabledBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Colors.black,
+                    ),
+                  ),
+                  focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Colors.black,
+                      width: 1.2,
+                    ),
+                  ),
+                ),
+              ),
             ),
-            ProfileMenu(
-              text: "Notifications",
-              icon: "assets/icons/bell.svg",
-              press: () {},
+            const SizedBox(height: 5),
+            Container(
+              margin: EdgeInsets.fromLTRB(20, 5, 20, 5),
+              child: TextFormField(
+                controller: _usernameController,
+                decoration: InputDecoration(
+                  filled: true,
+                  fillColor: Color(0xFFE6E0E9),
+                  labelText: 'Email',
+                  hintText: 'input your email here',
+                  labelStyle: TextStyle(color: Colors.black),
+                  enabledBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Colors.black,
+                    ),
+                  ),
+                  focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Colors.black,
+                      width: 1.2,
+                    ),
+                  ),
+                ),
+              ),
             ),
-            ProfileMenu(
-              text: "Settings",
-              icon: "assets/icons/settings.svg",
-              press: () {},
+            const SizedBox(height: 5),
+            Container(
+              margin: EdgeInsets.fromLTRB(20, 5, 20, 5),
+              child: TextFormField(
+                controller: _usernameController,
+                decoration: InputDecoration(
+                  filled: true,
+                  fillColor: Color(0xFFE6E0E9),
+                  labelText: 'Telepon',
+                  hintText: 'input your phone number here',
+                  labelStyle: TextStyle(color: Colors.black),
+                  enabledBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Colors.black,
+                    ),
+                  ),
+                  focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Colors.black,
+                      width: 1.2,
+                    ),
+                  ),
+                ),
+              ),
             ),
-            ProfileMenu(
-              text: "Help Center",
-              icon: "assets/icons/question.svg",
-              press: () {},
+            const SizedBox(height: 5),
+            Container(
+              margin: EdgeInsets.fromLTRB(20, 5, 20, 5),
+              child: TextFormField(
+                controller: _usernameController,
+                decoration: InputDecoration(
+                  filled: true,
+                  fillColor: Color(0xFFE6E0E9),
+                  labelText: 'Password',
+                  labelStyle: TextStyle(color: Colors.black),
+                  enabledBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Colors.black,
+                    ),
+                  ),
+                  focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Colors.black,
+                      width: 1.2,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(height: 5),
+            Container(
+              margin: EdgeInsets.fromLTRB(20, 5, 20, 5),
+              child: TextFormField(
+                controller: _usernameController,
+                decoration: InputDecoration(
+                  filled: true,
+                  fillColor: Color(0xFFE6E0E9),
+                  labelText: 'Confirm Password',
+                  labelStyle: TextStyle(color: Colors.black),
+                  enabledBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Colors.black,
+                    ),
+                  ),
+                  focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Colors.black,
+                      width: 1.2,
+                    ),
+                  ),
+                ),
+              ),
             ),
             ProfileMenu(
               text: "Log Out",
